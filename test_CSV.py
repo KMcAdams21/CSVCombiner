@@ -1,5 +1,5 @@
 import unittest
-import CSVConvert
+import CSVComb
 import csv
 
 class TestMethods(unittest.TestCase):
@@ -8,13 +8,13 @@ class TestMethods(unittest.TestCase):
     def test_headers(self):
         """Test the ability for program to get headers from CSV files"""
         # Testing header obtainment from CSVs with same columns
-        actual1 = CSVConvert.headerCheck(['./fixtures/accessories.csv',
+        actual1 = CSVComb.headerCheck(['./fixtures/accessories.csv',
                                           './fixtures/household_cleaners.csv'])
         expected1 = ['email_hash', 'category', 'filename']
         self.assertEqual(actual1, expected1)
 
         # Testing header obtainment from CSVs with different columns
-        actual2 = CSVConvert.headerCheck(['./fixtures/accessories.csv',
+        actual2 = CSVComb.headerCheck(['./fixtures/accessories.csv',
                                           './fixtures/otherColumns.csv'])
         expected2 = ['email_hash', 'category', 'Cat', 'Dog', '12B', 'filename']
         self.assertEqual(actual2, expected2)
@@ -28,7 +28,7 @@ class TestMethods(unittest.TestCase):
         outputFile = './fixtures/smallCombTest.csv'
         headers = ['abc','def','12','lmn','filename']
         # Running writeCSV method to create output file from normal inputs
-        CSVConvert.writeCSV(inputFiles, outputFile, headers)
+        CSVComb.writeCSV(inputFiles, outputFile, headers)
         # Saving results of created and test file
         data1 = []
         with open('./fixtures/smallComb.csv', 'r') as file1:
@@ -45,7 +45,7 @@ class TestMethods(unittest.TestCase):
         # Testing program handling of empty input
         emptyInput = []
         emptyOutput = './fixtures/empty.csv'
-        CSVConvert.writeCSV(emptyInput, emptyOutput, headers)
+        CSVComb.writeCSV(emptyInput, emptyOutput, headers)
         empty1 = []
         with open('./fixtures/empty.csv', 'r') as file1:
             empty1read = csv.reader(file1)
