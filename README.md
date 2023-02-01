@@ -13,7 +13,7 @@ The format goes:
 You must use the input file location in the name and you can use as many input files as you want.
 For example, if you had three input files you would type:
 #### python CSVConvert.py inputFileLocation inputFileLocation inputFileLocation outputFileName
-However, the last one must be the output file and please only give it the file name in the format name.csv
+However, the last one must be the output file and please only give it the file name in the format name.csv.
 To use the unit testing program, you must type:
 #### python -m unittest test_CSV.py
 This runs through various tests, including creating headers from different combinations of files to creating combined CSV files from various combinations of input files. 
