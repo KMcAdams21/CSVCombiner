@@ -4,6 +4,7 @@ import sys
 # Method to append CSV info to output CSV
 def writeCSV(inFiles, outFile, heads):
     """Given input files and desired output file, combine CSVs and output"""
+
     # Create new copy of file
     with open(outFile, 'w') as create_new_csv:
         print('Please wait...')
@@ -17,7 +18,7 @@ def writeCSV(inFiles, outFile, heads):
         writer.writeheader()
         # Loop through each input file and use method to append it to output file
         for inp in inFiles:
-        # Try to open file. If file does not exist, then return
+        # Try to open file. If file does not exist, then continue to next file
             try:
                 # Open new file to read and create reader
                 with open(inp, mode="r", newline='') as csv_in:
@@ -64,16 +65,12 @@ def main():
     # Create array of file inputs and output file
     inputs = sys.argv[1:-1]
     output = sys.argv[-1]
-
     # Getting headers of all files
     headers = headerCheck(inputs)
-    print(headers)
     # Create new file based on requested output file name
     newFile = './fixtures/' + output
-
     # Using method to write new CSV file from input files
     check = writeCSV(inputs, newFile, headers)
-
     # Print finish message
     if check:
         print("The new CSV file has been created!")
