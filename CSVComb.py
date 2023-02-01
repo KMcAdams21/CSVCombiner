@@ -67,10 +67,11 @@ def main():
     output = sys.argv[-1]
     # Getting headers of all files
     headers = headerCheck(inputs)
-    # Create new file based on requested output file name
-    newFile = './fixtures/' + output
+    # Adding ./ to put it in same directory if location not given
+    if not output.startswith('./') or not output.startswith('../'):
+        output = './' + output
     # Using method to write new CSV file from input files
-    check = writeCSV(inputs, newFile, headers)
+    check = writeCSV(inputs, output, headers)
     # Print finish message
     if check:
         print("The new CSV file has been created!")
