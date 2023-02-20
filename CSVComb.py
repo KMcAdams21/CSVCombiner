@@ -8,6 +8,9 @@ class CSVreader(object):
     def __init__(self, file):
         self.file = file
 
+    def change_file(self, file):
+        self.file = file
+
     def read_header(self, currHeaders):
         """Get headers from given file"""
         newHeaders = []
@@ -55,9 +58,12 @@ class CSVwriter(object):
 
 def getHeaders(inputs):
     """Helper function that creates reader class and reads for each file"""
+    if not inputs:
+        return False
     headers = []
+    data = CSVreader(inputs[0])
     for file in inputs:
-        data = CSVreader(file)
+        data.change_file(file)
         newHeaders = data.read_header(headers)
         if newHeaders:
             headers += newHeaders
@@ -66,14 +72,19 @@ def getHeaders(inputs):
 
 def writeFile(inputs, outFile, headers):
     """Helper function that given all information, writes the new file"""
+
+    if not inputs:
+        return False
+
     output = CSVwriter(outFile)
     output.write_file(headers)
 
     with open(outFile, mode="a", newline="\n") as new_csv:
         # Create writer and write first header
         write = csv.DictWriter(new_csv, fieldnames=headers, quoting=csv.QUOTE_ALL)
+        file = CSVreader(inputs[0])
         for inFile in inputs:
-            file = CSVreader(inFile)
+            file.change_file(inFile)
             file.read_write_file(write)
 
 
